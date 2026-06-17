@@ -16,12 +16,16 @@ Chronological record of every step. Newest entries at the bottom.
 - ✅ **Decision:** build on a **Linux VM/Docker on macOS**.
 - ✅ Installed `gh` 2.94.0 on the Mac; created this tracking repo.
 
+- ✅ **Confirmed device available:** owner has a physical Fairphone 6, bootloader
+  unlockable. (Needed for flashing/testing, not for the build.)
+- ⚠️ **Confirmed (source-backed):** Apple Silicon **cannot** host the HADK build. Platform
+  SDK is x86_64-only; Rosetta/Docker/VM emulation on macOS is unsupported and reported to
+  fail. The "Linux VM/Docker on Mac" plan is dropped. (see `01-build-environment.md`)
+
 ### Open questions (blocking next steps)
 
-1. **Build-host architecture** — this Mac is arm64; HADK is historically x86_64. Pick
-   x86_64 cloud VM vs x86_64 emulation on the Mac vs arm64+emulation. (see `01-build-environment.md`)
-2. **Physical device** — is a Fairphone 6 available, and is its bootloader unlocked /
-   unlockable? Needed for flashing/testing, not for the initial build.
+1. **x86_64 build host** — must pick: cloud VM (recommended), an existing physical x86_64
+   Linux machine, or (not recommended) slow local emulation. **Awaiting owner.**
 
 ### Next planned steps (not yet started)
 

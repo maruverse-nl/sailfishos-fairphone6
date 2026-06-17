@@ -8,18 +8,30 @@ The Sailfish OS **HADK** toolchain is Linux-only. It uses two chroot/SDK layers:
 This Mac (Apple Silicon, macOS) cannot run these natively. Chosen approach:
 **run a Linux x86_64 environment on the Mac.**
 
-## ⚠️ Architecture caveat to resolve first [UNVERIFIED]
+## ⚠️ RESOLVED: Apple Silicon cannot host the build (must use x86_64 Linux)
 
-The HADK build host is historically **x86_64**. This Mac is Apple Silicon (arm64).
-Options, in rough order of reliability — **must confirm before committing**:
+**Confirmed against sources (2026-06-17):** the Sailfish Platform SDK / HADK host is
+**Intel x86_64 only**. Apple Silicon is explicitly *not supported*.
 
-- **x86_64 Linux cloud VM** (most reliable; sidesteps arch issues entirely).
-- **x86_64 Linux VM on Mac via emulation** (e.g. UTM/QEMU) — works but slow for a
-  full Android build.
-- **arm64 Ubuntu container + x86_64 emulation** — risky; HADK prebuilts may be x86_64-only.
+- Sailfish OS docs: "The Sailfish Platform SDK runs on Linux machines with Intel x86
+  CPUs, Apple silicon is not supported."
+- Jolla developer (vige) on the forum: "You can't run x86 vms on arm. Rosetta does not
+  help with that." Docker emulation on macOS for this is unsupported, no plans (still
+  true as of Feb 2026). Contributors report `exec format error` under
+  Parallels/UTM/Docker.
+- The community `sailfishos-open/docker-sailfishos-builder` only packages RPMs — it does
+  **not** build HAL/HADK adaptations, so it does not help here.
 
-> Decision recorded: "Linux VM/Docker on Mac". Need to pick x86_64-emulated vs an
-> arm64 host with x86_64 build tooling. **Open question for owner — see porting log.**
+> The earlier "Linux VM/Docker on Mac" decision is therefore **not viable** for the HAL
+> build. We need a genuine x86_64 Linux host. Re-deciding with the owner — see porting log.
+
+### Viable x86_64 options
+
+- **x86_64 cloud VM** (recommended): no emulation, fast, disposable. Needs ~16 GB+ RAM,
+  ~200 GB+ disk. Cheap providers (e.g. Hetzner) fit well.
+- **Physical x86_64 Linux box** (if owner has one): ideal, no recurring cost.
+- **x86_64 full-system emulation on the Mac (UTM/QEMU)**: technically possible, officially
+  unsupported, and *very* slow for a full Android build — not recommended.
 
 ## Baseline requirements (from HADK)
 
