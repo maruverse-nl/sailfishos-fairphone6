@@ -23,9 +23,23 @@ Build host decision: **x86_64 cloud VM** (Apple Silicon ruled out — see `01`).
 
 **Hetzner Cloud** (EU-based, fits .nl owner; good price/perf for builds).
 
-Confirmed instance match (2026-06-17): **CPX51 = 16 vCPU / 32 GB RAM / 360 GB SSD** — fits
-the target exactly. (Dedicated-vCPU CCX line is faster under sustained compile but pricier;
-CPX51 shared is fine for a one-off port.) OS image: **Ubuntu 22.04**. Location: EU.
+Confirmed instance (from owner's live console, post June-2026 price change):
+
+| Plan | vCPU | RAM | SSD | €/h | €/mo | Note |
+|---|---|---|---|---|---|---|
+| **CX53** ✅ | 16 (Intel/AMD) | 32 GB | 320 GB | 0.057 | 35.68 | **chosen** — best value, hits target |
+| CPX52 | 12 (AMD) | 24 GB | 480 GB | 0.195 | 121.59 | the ~€120 plan owner first saw — overpriced for us |
+| CPX62 | 16 (AMD) | 32 GB | 640 GB | 0.252 | 157.29 | dedicated-AMD; only if we need lots more disk |
+
+OS image: **Ubuntu 22.04**. Location: EU.
+
+**Cost control:** Hetzner bills hourly, capped at monthly price; you only pay while the
+server exists. A port is days–weeks → delete when a flashable image exists. At €0.057/h,
+~1 week ≈ €9.50, ~2 weeks ≈ €19.
+
+**Disk caveat:** CX53 has 320 GB (vs 360 GB target). A16 source + build should fit but may
+be tight. If so, attach a Hetzner Volume (~€0.0052/GB/mo, e.g. +100 GB ≈ €5/mo) — no server
+resize needed. Watch `df -h` during/after `repo sync`.
 
 ## Workflow
 
