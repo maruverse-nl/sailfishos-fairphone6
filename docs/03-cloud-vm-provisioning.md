@@ -19,11 +19,13 @@ Build host decision: **x86_64 cloud VM** (Apple Silicon ruled out — see `01`).
 - "At least 4 GiB of RAM (the more the better)"
 - Source: https://hadk.sailfishos.org/prerequisites/
 
-## Provider
+## Provider — Hetzner (chosen)
 
-Recommended: **Hetzner Cloud** (EU-based, fits .nl owner; good price/perf for builds).
-A shared-vCPU instance around 16 vCPU / 32 GB / ~360 GB disk matches the target. Exact
-SKU/price to be confirmed at provision time (specs change). Any x86_64 provider works.
+**Hetzner Cloud** (EU-based, fits .nl owner; good price/perf for builds).
+
+Confirmed instance match (2026-06-17): **CPX51 = 16 vCPU / 32 GB RAM / 360 GB SSD** — fits
+the target exactly. (Dedicated-vCPU CCX line is faster under sustained compile but pricier;
+CPX51 shared is fine for a one-off port.) OS image: **Ubuntu 22.04**. Location: EU.
 
 ## Workflow
 

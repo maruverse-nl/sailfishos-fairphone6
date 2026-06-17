@@ -22,10 +22,15 @@ Chronological record of every step. Newest entries at the bottom.
   SDK is x86_64-only; Rosetta/Docker/VM emulation on macOS is unsupported and reported to
   fail. The "Linux VM/Docker on Mac" plan is dropped. (see `01-build-environment.md`)
 
+- ✅ **Decision:** build host = **Hetzner Cloud, CPX51** (16 vCPU / 32 GB / 360 GB),
+  Ubuntu 22.04, EU. (see `03-cloud-vm-provisioning.md`)
+- ✅ Documented why an "Android build" is needed for a non-Android OS (libhybris/Halium
+  HAL reuse). (see `04-why-android-hal.md`)
+
 ### Open questions (blocking next steps)
 
-1. **x86_64 build host** — must pick: cloud VM (recommended), an existing physical x86_64
-   Linux machine, or (not recommended) slow local emulation. **Awaiting owner.**
+1. **VM provisioning** — owner to create the Hetzner CPX51, add the Mac SSH key, share IP.
+   Then setup is driven over SSH from the Mac. **Awaiting owner.**
 
 ### Next planned steps (not yet started)
 
