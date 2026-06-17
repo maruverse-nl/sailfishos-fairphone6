@@ -41,6 +41,19 @@ server exists. A port is days–weeks → delete when a flashable image exists. 
 be tight. If so, attach a Hetzner Volume (~€0.0052/GB/mo, e.g. +100 GB ≈ €5/mo) — no server
 resize needed. Watch `df -h` during/after `repo sync`.
 
+## Networking: add IPv4 (€0.50/mo) — do NOT go IPv6-only
+
+Verified 2026-06-17:
+- **github.com has no AAAA record** (confirmed from the Mac + current reports) → no native
+  IPv6 git clone. Our entire `repo sync` (hundreds of repos, 100 GB+) comes from GitHub.
+- **Hetzner has no official NAT64**; IPv6-only reaches IPv4 via third-party `nat64.net`,
+  which is rate-limited/flaky — fatal for a long, GitHub-heavy sync.
+- IPv4 on Hetzner = **€0.50/mo** (~€0.0007/h) → negligible vs the VM.
+- (The Mac itself has working IPv6, so SSH-in would work either way; the build is the
+  blocker, not SSH.)
+
+**Decision:** provision CX53 **with a primary IPv4**.
+
 ## Workflow
 
 The Mac will drive setup over **SSH**:
