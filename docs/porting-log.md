@@ -27,10 +27,25 @@ Chronological record of every step. Newest entries at the bottom.
 - ✅ Documented why an "Android build" is needed for a non-Android OS (libhybris/Halium
   HAL reuse). (see `04-why-android-hal.md`)
 
-### Open questions (blocking next steps)
+- ⏸️ **PAUSED (owner travelling) — 2026-06-17.** Cloud VM not provisioned yet; owner
+  reconsidering cost. All Phase 0 decisions are locked below; nothing is blocked except
+  picking/standing up the x86_64 host.
 
-1. **VM provisioning** — owner to create the Hetzner CPX51, add the Mac SSH key, share IP.
-   Then setup is driven over SSH from the Mac. **Awaiting owner.**
+### Build-host options when resuming (cost)
+
+- **Hetzner CX53, short sprint + delete:** hourly billing (€0.057/h), delete VM + any
+  volume when done → realistic ~€10–20 total, not a recurring €36/mo. Idle = wasted money.
+- **Local x86_64 PC/laptop (€0):** any Intel/AMD box that runs Ubuntu 22.04 with ~300 GB
+  free + 16 GB RAM works. Best if owner has/can borrow one. (Apple Silicon ruled out.)
+- Filesystem for the build dir: **ext4** (case-sensitive required; ext4 = most-tested).
+
+### Resume checklist (Phase 1 entry)
+
+1. Stand up an x86_64 Ubuntu 22.04 host (cloud CX53 *with IPv4*, or local PC), ext4.
+2. Add the Mac SSH key (`fp6 maru`) if remote; share IP. Confirm SSH-driven setup is OK.
+3. Then Phase 1: system packages → Sailfish Platform SDK (≥4.3.0.15) → HABUILD Ubuntu
+   chroot → HADK env (`VENDOR=fairphone`, `DEVICE=FP6`) → `repo init/sync` of `hybris-23.2`
+   + ArianK16a FP6 (`lineage-23.2`) device sources.
 
 ### Next planned steps (not yet started)
 

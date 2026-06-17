@@ -25,7 +25,9 @@ LineageOS base.
 
 ## Status
 
-🟡 **Phase 0 — research & environment setup.** See the porting log for the live step list.
+⏸️ **Paused (2026-06-17)** during Phase 0 — owner travelling, deciding on a cost-effective
+x86_64 build host. All research/decisions locked. Resume checklist + cheaper host options
+are at the bottom of [`docs/porting-log.md`](docs/porting-log.md).
 
 ## Docs
 
